@@ -1,5 +1,7 @@
 # Can I Buy?
 
+[![Build Status](https://travis-ci.org/hasken-14/can-i-buy.svg?branch=master)](https://travis-ci.org/hasken-14/can-i-buy)
+
 A simple tool which allows you to map all your savings, through different and unlimited profiles. Open source and built with Ruby on Rails, it's easy to customize and implement new features as you'd like.
 
 ## Supported Ruby versions
