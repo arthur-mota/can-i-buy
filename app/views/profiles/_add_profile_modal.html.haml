@@ -1,0 +1,13 @@
+.modal.fade#addProfileModal{:tabindex => "-1", :role => "dialog", "aria-labelledby" => "addProfileModalLabel", "aria-hidden" => "true"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      = simple_form_for Profile.new, :url => {:action => "create", :controller => "profiles"}, defaults: { wrapper_html: { class: 'form-group' }, input_html: { class: 'form-control' }} do |form|
+        .modal-header
+          %h5.modal-title#addProfileModalLabel Add Profile
+          %button.close{:type => "button", :data => {:dismiss => "modal"}, "aria-label" => "Close"}
+            %span{"aria-hidden" => "true"} &times;
+        .modal-body
+          = form.input :profile_name, required: true, label: "Profile name", placeholder: "e.g. Christmas Gifts"
+        .modal-footer
+          %button.btn.btn-outline-secondary{:type => "button", :data => {:dismiss => "modal"}} Close
+          = form.button :submit, "Add Profile", class: 'btn btn-outline-dark'

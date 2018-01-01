@@ -1,0 +1,16 @@
+.modal.fade#addProductModal{:tabindex => "-1", :role => "dialog", "aria-labelledby" => "addProductModalLabel", "aria-hidden" => "true"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      = simple_form_for Product.new, :url => {:action => "create", :controller => "products"}, defaults: { wrapper_html: { class: 'form-group' }, input_html: { class: 'form-control' }} do |form|
+        .modal-header
+          %h5.modal-title#addProductModalLabel Add Product
+          %button.close{:type => "button", :data => {:dismiss => "modal"}, "aria-label" => "Close"}
+            %span{"aria-hidden" => "true"} &times;
+        .modal-body
+          = form.input :name, required: true, label: "Product name"
+          = form.input :price, required: true, label: "Product price", :as => "decimal"
+          = form.input :url, :as => :url, label: "Product URL"
+          = form.input :profile_id, :as => :hidden, :input_html => { :value => "#{@profile.id}"}
+        .modal-footer
+          %button.btn.btn-outline-secondary{:type => "button", :data => {:dismiss => "modal"}} Close
+          = form.button :submit, "Add Product", class: 'btn btn-outline-dark'

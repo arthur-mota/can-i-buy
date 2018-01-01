@@ -1,0 +1,14 @@
+.modal.fade#editProfileModal{:tabindex => "-1", :role => "dialog", "aria-labelledby" => "editProfileModalLabel", "aria-hidden" => "true"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      = simple_form_for @profile, defaults: { wrapper_html: { class: 'form-group' }, input_html: { class: 'form-control' }} do |form|
+        .modal-header
+          %h5.modal-title#addProfileModalLabel Edit Profile
+          %button.close{:type => "button", :data => {:dismiss => "modal"}, "aria-label" => "Close"}
+            %span{"aria-hidden" => "true"} &times;
+        .modal-body
+          = form.input :profile_name, required: true, label: "Profile name"
+        .modal-footer
+          %button.btn.btn-outline-secondary{:type => "button", :data => {:dismiss => "modal"}} Close
+          = link_to 'Delete Profile', url_for(action: :destroy, controller: :profiles, id: @profile.id), method: :delete, data: {confirm: "Are you sure you want to delete \"#{@profile.profile_name}\" and all products inside it?"}, class: "btn btn-outline-danger"
+          = form.button :submit, "Update Profile", class: 'btn btn-outline-dark'

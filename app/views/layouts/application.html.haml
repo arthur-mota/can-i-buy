@@ -1,0 +1,36 @@
+!!!
+%html{:lang => "pt-br"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, shrink-to-fit=no"}
+    = csrf_meta_tags
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+    %title Can I Buy?
+  %body
+    = render "layouts/navbar"
+    - if controller.controller_name == "products"
+      = render "products/add_product_modal"
+      = render "profiles/edit_profile_modal"
+    = render "profiles/add_profile_modal"
+
+    .container
+      - flash.each do |name, msg|
+        %br
+        %div{:class => "alert alert-#{name} alert-dismissable fade show", :role => "alert"}
+          = msg
+          %button.close{:type => "button", :data => {:dismiss => "alert"}, "aria-label" => "Close"}
+            %span{"aria-hidden" => "true"} &times;
+      = yield
+
+      %hr{:style => "margin-top: 50px"}
+      %footer.footer{:style => "margin-bottom: 20px"}
+        .container
+          %span.text-muted
+            Built and published under MIT License
+            %br
+            %a{:href => "https://github.com/hasken-14/can-i-buy", :target => :_blank}
+              View on GitHub
+              = fa_icon "github"

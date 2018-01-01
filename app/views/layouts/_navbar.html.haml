@@ -1,0 +1,24 @@
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  %a.navbar-brand{:href => root_path}
+    Can I Buy?
+  %button.navbar-toggler{:type => "button", :data => {:toggle => "collapse", :target => '#navbarSupportedContent'}, "aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation"}
+    %span.navbar-toggler-icon
+  .collapse.navbar-collapse#navbarSupportedContent
+    %ul.navbar-nav.ml-auto
+      .btn-group
+        - if controller.controller_name == "products"
+          %button.btn.btn-outline-light{:type => "button", :data => {:toggle => "modal", :target => '#editProfileModal'}}
+            #{@profile.profile_name}
+        - else
+          %button.btn.btn-outline-light{:type => "button", :data => {:toggle => "dropdown"}, "aria-haspopup" => "true", "aria-expanded" => "false"}
+            Select profile
+        %button.btn.btn-outline-light.dropdown-toggle.dropdown-toggle-split{:type => "button", :data => {:toggle => "dropdown"}, "aria-haspopup" => "true", "aria-expanded" => "false"}
+          %span.sr-only Toggle Dropdown
+        .dropdown-menu
+          - @profiles.each do |profile|
+            %a.dropdown-item{:href => "#{profile_products_path(profile.id)}"}#{profile.profile_name}
+          .dropdown-divider
+          %a.dropdown-item{:href => '#', :data => {:toggle => "modal", :target => "#addProfileModal"}} Add Profile #{fa_icon "plus-circle"}
+      - if controller.controller_name == "products"
+        &nbsp;&nbsp;
+        %button.btn.btn-outline-light.my-2.my-sm-0{:type => "button", :data => {:toggle => "modal", :target => "#addProductModal"}} Add Product
