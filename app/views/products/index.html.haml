@@ -69,63 +69,23 @@
                   = link_to "+ $1.00", url_for(action: :update, profile_id: @profile.id, id: product.id, progress: product.progress+1), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-dark btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(product.progress + 1, :precision => 2)} (#{((product.progress + 1) * 100/product.price).to_i}%)"
                   = link_to "+ $0.10", url_for(action: :update, profile_id: @profile.id, id: product.id, progress: product.progress+0.1), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-dark btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(product.progress + 0.1, :precision => 2)} (#{((product.progress + 0.1) * 100/product.price).to_i}%)"
                   = link_to "- $0.10", url_for(action: :update, profile_id: @profile.id, id: product.id, progress: product.progress-0.1), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-secondary btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(product.progress - 0.1, :precision => 2)} (#{((product.progress - 0.1) * 100/product.price).to_i}%)"
+
               .row{:style => "margin-top: 35px"}
                 .col-md-3.col-lg-3.col-sm-12.col-xs-12
                   %button.btn.btn-outline-dark{:type => "button", :data => {:toggle => "collapse", :target => "#addCustomValueCollapse#{product.id}"}, "aria-expanded" => "false", "aria-controls" => "addCustomValueCollapse#{product.id}", :style => "width: 100%;"} Custom Value
+
                 .col-xs-12.col-sm-12.col-md-9.col-lg-9
                   .collapse{:id => "addCustomValueCollapse#{product.id}"}
                     .card.card-body
                       .slidecontainer
-                        %input.customValueSlider{:type => "range", :min => "1", :max => "1000", :value => "1", :id => "customValueRange#{product.id}"}
+                        %input.customValueSlider{:type => "range", :min => "1", :max => "1000", :value => "1", :id => "customValueRange#{product.id}", :oninput => "processCustomValue(#{product.id});"}
 
                         .customValueButtons
                           = link_to "Remove $1", url_for(action: :update, profile_id: @profile.id, id: product.id, progress: product.progress - 1), method: :patch, class: "btn btn-dark", id: "removeCustomValue#{product.id}"
                           = link_to "Add $1", url_for(action: :update, profile_id: @profile.id, id: product.id, progress: product.progress + 1), method: :patch, class: "btn btn-dark", id: "addCustomValue#{product.id}", "data-product-id": product.id, "data-current-progress": product.progress
+
             %hr
             = link_to 'Reset progress', url_for(action: :update, profile_id: @profile.id, id: product.id, progress: 0), method: :patch, class: "btn btn-outline-secondary", data: {confirm: "You're about to reset your progress in this product ($#{number_with_precision(product.progress, :precision => 2)} (#{percentage.to_i}%) -> $0.00 (0%)). Are you sure?"}
             &nbsp;
             = link_to 'Delete Product', url_for(action: :destroy, id: product.id), method: :delete, data: {confirm: "Are you sure you want to delete \"#{product.name}\"?"}, class: "btn btn-outline-danger"
       %br
-
-- content_for :javascript do
-  :javascript
-    $(document).ready( function() {
-      var customValueSlider = document.getElementById("customValueRange");
-      var buttonAdd = document.getElementById("addCustomValue");
-      var buttonRemove = document.getElementById("removeCustomValue");
-      var currentProgress = parseInt(buttonAdd.getAttribute('data-current-progress'));
-      var productId = buttonAdd.getAttribute('data-product-id');
-
-      customValueSlider.value = 1
-
-      customValueSlider.oninput = function() {
-        valueSlider = this.value;
-        customizeButtons(productId, valueSlider);
-      }
-
-      function customizeButtons(product, valueSlider){
-        customizeAddButton(product, valueSlider);
-        customizeRemoveButton(product, valueSlider);
-      }
-
-      function customizeAddButton(product, valueSlider){
-        newProgress = setNewProgress("add");
-        buttonAdd.innerHTML = "Add $" + valueSlider;
-        buttonAdd.href = "products/" + product + "?progress=" + newProgress;
-      }
-
-      function customizeRemoveButton(product, valueSlider){
-        newProgress = setNewProgress("remove");
-        buttonRemove.innerHTML = "Remove $" + valueSlider;
-        buttonRemove.href = "products/" + product + "?progress=" + newProgress;
-      }
-
-      function setNewProgress(operation){
-        valueSlider = parseInt(customValueSlider.value);
-        if (operation == "add") {
-          return currentProgress + valueSlider;
-        } else {
-          return currentProgress - valueSlider;
-        }
-      }
-    });
