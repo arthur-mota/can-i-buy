@@ -3,15 +3,15 @@ rvm:
 - 2.4.3
 - 2.3.6
 - 2.3.1
-bundler_args: --retry 5
+bundler_args: "--retry 5"
 script:
-  - bin/rake db:migrate RAILS_ENV=test
-  - bin/rake
+- bin/rake db:migrate RAILS_ENV=test
+- bin/rake
 deploy:
   provider: heroku
   app: can-i-buy
   api_key:
-    secure: CJqWQ/GVfCpplDXdB7tS6+unlSRloGi3qiTSY9DyvAza6G3locXiFUZnhNsI5YL+Mm2Jg9LxB+nR9iYJ4lAiJ2MaI9J0+cYCbeEkRs0V9i2o2JECSFYmdSURG8AKhe+GC+SpaX+RlVNPlsco4OE8AxzE+gAo/znOtJhOBB3sa9vzAoWQjtYFYv1HDGT2q+WXCAHBh5kBU+kRWe7QYo437iHI5SsvAuy95VNhz/jP7bw2D/rfqe/lizTn8viw7Zh/QBHNF6Yt8nO1Z9GvyHeiYOM4fe92hXg+NasnA3kBrXy9WFAszIEkffC9Ypx182ITniNtBwtnEVsgunsoN9urPJYPlEP3Xp1whyM6WJiTHfSxWQo32bf1e9VavxuoFu7MBbk10WKSZM6huphJq2K8k8Hp6riZDNujvFPJpH4JFbbyfNTLntFSeLHjHGxW8/w3uULXfrj0sOrQbGXIotSxFmwD09YQgMp6MSnHXeg82sz9PHwVd54W0x7NU9LC5Nh5VjBPDMuyAsLZXIBjnxIbqko4pGAKCh7hwquEMZdR6/VOCnEjoR6DYV09gj4bP/0kClY1bhvavmNOuQYPOKMpUznJjrwueVfigrraNaonnkA/P6TFGviF5eC3NCp691uHwDqvfagxn4j3PIaAI04KDhjTna8IJq7+hef28t6DNB0=
+    secure: g9m8jbvHBivAMJ+aKV6NHqkKzYwuTkFS0TQCfIuJNceauUJcgsHIzcG77+Cp5MSSykamV36wSoDr/8aEPAZigwLVhS/JpFyxqcg5s/LfrC/5jVlsDgNjow7Scz17Gxh0nTo5HA6JMyzuouNuWupRweMtxu+2qya0NdodUORQaGb3biGyYt/KUBHurr7JDGgUywZnxiuqcrKFFcwsyjM3ztzJhdbs8YEeIzCo/FY5J11VXft0hHlO18wK3xheKLZaF3QLgcOlzj90NBMWjxXgJz7vMw3hApSvnt7xu0FlrdZyCs1A2KAf47Cyqy5Xn3gk5sB4wKZb986m56EJRJdh7Zw5WlC5VJM69ExA7mDjnKBkOLad90tRxt4/kF4Jm2XTm3swmJ1juVhfkLDd2sVjEhltvaq82+x7VU4OK3rQrFheuM24cRf7SCBijGJJMzVjTJPr9QOKkfaU2VoTGlPf6//C3XMFe7k6dXmdt4rAWwinuUcFGuSoL+jaC+iyKZF0ffubIpt+oOxeIEw4V3A4rtuiTYIZ9CYzxKo66W99tFfzCDtdPQxOBCRIXCZuj24kHNXjCGVgSxm/1IzSmX06LqLWNQIGWJ4xBw5UN3gaKI8mxoIRjTLlUZySVNxZLy0MXcYvN+oZD5m+zf36SypZ+MfanXlmgAjvN7KACNjTvRs=
   strategy: git
   on:
     all_branches: true
