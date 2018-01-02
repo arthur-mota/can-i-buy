@@ -14,4 +14,5 @@ deploy:
     secure: rCw1NH9M2E11itFsp3kOQ+P9+JknOLGe8AnX5TBOqTjXxhnJnBglTeSViinYwt2mjP6ZYKYH3M0YvqDQjwQruVunKsu4yjrpwztAkVvlg+HG07+lTv7kuRrjJSRmLV9wurjttzIJZR6HQtOFzgwO2A3HgYy/uGqj2iwgQ+FWFYqgAV5mYsEImFvbim79ak3VIfC9ob887lSZQmBB5g2uX+L7J2Z4n4KrcvLOicN8AnauzDrdHdTYFg9UmzZoyY/G0//SIwuKM08GYLIaHSYCu1cfg1atBV0sauSDq7Dq+i1VskrSqosCUmzo00PADcfbtgRzmKk2jghua9aa+4PoJAI9dJ1TkfNSWecO61a3rM9QuzrI94DAu558SoQMl55dCGdsE/rtFBHwp2TKFWXB5tJ3xUbzdJ3dGGwqVHdvT6pYkDm2dih4q/hp+5eV3KBJnE54E1ymuir4WOp5yeBq4cFWWmbAec+B98qYmhCLAtm79JTI91ZQdCA/rAMjP0BYeslpf6e4fVU4Qm+VegbOpIK/G/8wbcKXQh1cVvfQaX0k6YVE3oQRSCiObEKwfrZKLoAw8KZiomdQDt0JMc4sxdVRFPYFk++nW213ZbNWFpoMBtcYbU17F2pqb0jvPfhroTQJbeeywEqKyx5WCTurTtmPZn9jY3DAqbojZLmMdzY=
   strategy: git
   on:
-    all_branches: true
+    branch: master
+    rvm: 2.3.1
