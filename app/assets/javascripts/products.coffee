@@ -1,3 +1,40 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
+window.processCustomValue = (productId) ->
+  customValueSlider = document.getElementById('customValueRange' + productId)
+  buttonAdd = document.getElementById('addCustomValue' + productId)
+  buttonRemove = document.getElementById('removeCustomValue' + productId)
+  currentProgress = parseInt(buttonAdd.getAttribute('data-current-progress'))
+
+  customizeButtons = (product, valueSlider) ->
+    customizeAddButton product, valueSlider
+    customizeRemoveButton product, valueSlider
+    return
+
+  customizeAddButton = (product, valueSlider) ->
+    newProgress = setNewProgress('add')
+    buttonAdd.innerHTML = 'Add $' + valueSlider
+    buttonAdd.href = 'products/' + product + '?progress=' + newProgress
+    return
+
+  customizeRemoveButton = (product, valueSlider) ->
+    newProgress = setNewProgress('remove')
+    buttonRemove.innerHTML = 'Remove $' + valueSlider
+    buttonRemove.href = 'products/' + product + '?progress=' + newProgress
+    return
+
+  setNewProgress = (operation) ->
+    valueSlider = parseInt(customValueSlider.value)
+    if operation == 'add'
+      currentProgress + valueSlider
+    else
+      currentProgress - valueSlider
+
+  customValueSlider.oninput = ->
+    valueSlider = @value
+    customizeButtons productId, valueSlider
+    return
+
+  return
