@@ -1,7 +1,5 @@
 # Can I Buy? [![Build Status](https://travis-ci.org/hasken-14/can-i-buy.svg?branch=master)](https://travis-ci.org/hasken-14/can-i-buy) [![Dependency Status](https://beta.gemnasium.com/badges/github.com/hasken-14/can-i-buy.svg)](https://beta.gemnasium.com/projects/github.com/hasken-14/can-i-buy) [![Maintainability](https://api.codeclimate.com/v1/badges/14333236233f66a20c6e/maintainability)](https://codeclimate.com/github/hasken-14/can-i-buy/maintainability)
 
-[![Support me at Pledgie](https://pledgie.com/campaigns/35447.png?skin_name=chrome)](https://pledgie.com/campaigns/35447)
-
 A simple tool which allows you to map all your savings, through different and unlimited profiles. Open source and built with Ruby on Rails, it's easy to customize and implement new features as you'd like.
 
 ## Supported Ruby versions
