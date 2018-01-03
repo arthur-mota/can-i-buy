@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  url: MyText
-  price: 1
+  name: Product 1
+  url: http://www.google.com/
+  price: 1000
+  profile_id: 1
 
 two:
-  name: MyString
-  url: MyText
-  price: 1
+  name: Product 2
+  url: http://www.google.com/
+  price: 1000
+  profile_id: 2
