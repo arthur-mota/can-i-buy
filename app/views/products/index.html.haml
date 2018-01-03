@@ -20,7 +20,7 @@
           %h5.mb-0
             %a.collapsed{:data => {:toggle => "collapse"}, :href => "#collapse#{product.id}", :role => "button", "aria-expanded" => "false", "aria-controls" => "collapse#{product.id}"}
               = product.name
-              %span.badge.badge-dark #{percentage.to_i}% -> $#{number_with_precision(product.progress, :precision => 2)} / $#{product.price}
+            %span.badge.badge-dark #{percentage.to_i}% -> $#{number_with_precision(product.progress, :precision => 2)} / $#{number_with_precision(product.price, :precision => 2)}
 
         .collapse.show{:id => "collapse#{product.id}", :role => "tabpanel", "aria-labelledby" => "heading#{product.id}", :data => {:parent => "#accordion#{product.id}"}}
           .card-body

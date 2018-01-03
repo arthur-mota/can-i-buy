@@ -40,4 +40,10 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to profile_products_path(@profile)
   end
+
+  test "should update a product" do
+    put profile_product_url(@profile, @product), params: { progress: 1000, profile_id: @profile.id }
+    @product.reload
+    assert_equal 1000.0, @product.progress
+  end
 end

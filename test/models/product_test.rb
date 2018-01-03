@@ -1,9 +1,6 @@
 require 'test_helper'
 
 class ProductTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
   def setup
     @profile = profiles(:one)
     @product = products(:one)
@@ -16,6 +13,7 @@ class ProductTest < ActiveSupport::TestCase
   test "valid user" do
     assert @product.valid?
   end
+
   # Create
 
   test "should create a new product" do
@@ -64,4 +62,6 @@ class ProductTest < ActiveSupport::TestCase
     refute @product.valid?, 'saved product with name.length > 255'
     assert_not @product.save
   end
+
+  # Update
 end

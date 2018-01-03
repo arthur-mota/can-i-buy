@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+
   def index
     # Store all products into @products by created_at descending order
     @profiles = Profile.all
@@ -23,9 +24,9 @@ class ProductsController < ApplicationController
 
   def create
     # Creates a new product
-    if Product.new(product_params).valid?
+    if Product.new(product_params_create).valid?
       # Save to the database if the params go with the Active Record Validations (see models/product.rb)
-      @product = Product.new(product_params)
+      @product = Product.new(product_params_create)
       # Uncomment the next line to check the passed parameters
       # return render plain: @product.inspect
       @product.save
@@ -39,32 +40,34 @@ class ProductsController < ApplicationController
   end
 
   def update
-    # Updates the progress from id
+    # Updates the ID's progress
 
     if update_valid?(params[:id], params[:progress])
-      # If all security tests  from update_valid? passed
+      # Security tests from update_valid? passed
 
       # Retrieve the product from database
-      @product = Product.find(params[:id].to_i)
+      @product = Product.find(params[:id])
 
-      # If the updated progress would be negative, makes it equal to 0
+      # If progress would be negative, makes it equal to 0
       if params[:progress].to_f < 0
         params[:progress] = 0
       end
 
       # Try to update progress
-      if @product.update({"progress" => params[:progress].to_f})
+      if @product.update(product_params_update)
         # Success
-        flash[:success] = "Product progress updated successfully."
+        flash[:success] = "Product updated successfully."
       else
-        # Update was unsuccessful
+        # Couldn't update
         flash[:danger] = "There was an error while saving your update."
       end
     else
       # Security tests didn't passed
       flash[:danger] = "Your input isn't valid. Try again."
     end
-    redirect_to profile_products_path(params[:profile_id])
+
+    # Redirects back
+    return redirect_to profile_products_path(params[:profile_id])
   end
 
   def destroy
@@ -76,9 +79,14 @@ class ProductsController < ApplicationController
   end
 
   private
-    def product_params
+    def product_params_create
       params[:product][:price] = helper.number_with_precision(params[:product][:price], :precision => 2)
-      params.require(:product).permit(:name, :price, :url, :profile_id)
+      params.require(:product).permit(:name, :price, :url, :profile_id, :progress)
+    end
+
+    def product_params_update
+      params[:progress] = helper.number_with_precision(params[:progress], :precision => 2)
+      params.permit(:progress)
     end
 
     def helper
