@@ -12,7 +12,9 @@ The app is currently working in Ruby __2.4.3__, __2.3.6__, __2.3.1__. You can se
 
 ## Trying before install
 
-You can try _can-i-buy_ at our [Heroku app](https://can-i-buy.herokuapp.com/).
+You can try _can-i-buy_ at our [Heroku app](https://can-i-buy.herokuapp.com/). 
+
+Note about Heroku: as we use a free Heroku plan, if the monthly quota is exceeded, the app won't work until the month ends.
 
 ## Installing
 
