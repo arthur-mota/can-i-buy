@@ -16,15 +16,27 @@
           %h5.card-title= @profile.profile_name
           %p.card-text This profile is blank. Why don't you add a new product?
           %a.btn.btn-outline-dark{:href => "#", :role => "button", :data => {:toggle => "modal", :target => "#addProductModal"}} Add Product
+- else
+  - ids = []
+  - @products.each do |product|
+    - ids << product.id
+
+  .row
+    .col-12.col-sm-6
+      %button.btn.btn-outline-dark{:type => "button", :onclick => "#{ids}.forEach(expand)"} Expand all
+      %button.btn.btn-outline-dark{:type => "button", :onclick => "#{ids}.forEach(collapse)"} Collapse all
+
+%br
 
 - @products.each do |product|
   - if product.profile_id == @profile.id
     - percentage = (product.progress * 100)/product.price
+
     %div{:role => "tablist", :id => "accordion#{product.id}"}
       .card
         .card-header{:role => "tab", :id => "heading#{product.id}"}
           %h5.mb-0
-            %a.collapsed{:data => {:toggle => "collapse"}, :href => "#collapse#{product.id}", :role => "button", "aria-expanded" => "false", "aria-controls" => "collapse#{product.id}"}
+            %a.collapsed{:data => {:toggle => "collapse"}, :href => "#collapse#{product.id}", :role => "button", "aria-expanded" => "false", "aria-controls" => "collapse#{product.id}", :id => "collapseToggler#{product.id}"}
               = product.name
             %span.badge.badge-dark #{percentage.to_i}% -> $#{number_with_precision(product.progress, :precision => 2)} / $#{number_with_precision(product.price, :precision => 2)}
 
