@@ -38,3 +38,13 @@ window.processCustomValue = (productId) ->
     return
 
   return
+
+window.check_last_updated = ->
+  last_updated = document.getElementById('lastUpdatedElement')
+  if last_updated
+    product_id = last_updated.innerHTML
+    collapse_id = 'collapse' + product_id
+    collapse = document.getElementById(collapse_id)
+    collapse.classList.add 'show'
+    window.location.href = '#accordion' + product_id
+  return

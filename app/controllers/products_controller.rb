@@ -66,6 +66,8 @@ class ProductsController < ApplicationController
       flash[:danger] = "Your input isn't valid. Try again."
     end
 
+    # Set a session containing the updated product
+    session[:product_id] = @product.id
     # Redirects back
     return redirect_to profile_products_path(params[:profile_id])
   end
