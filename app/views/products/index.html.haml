@@ -36,7 +36,7 @@
       .card
         .card-header{:role => "tab", :id => "heading#{product.id}"}
           %h5.mb-0
-            %a.collapsed{:data => {:toggle => "collapse"}, :href => "#collapse#{product.id}", :role => "button", "aria-expanded" => "false", "aria-controls" => "collapse#{product.id}", :id => "collapseToggler#{product.id}"}
+            %a.collapsed.text-dark{:data => {:toggle => "collapse"}, :href => "#collapse#{product.id}", :role => "button", "aria-expanded" => "false", "aria-controls" => "collapse#{product.id}", :id => "collapseToggler#{product.id}"}
               = product.name
             %span.badge.badge-dark #{percentage.to_i}% -> $#{number_with_precision(product.progress, :precision => 2)} / $#{number_with_precision(product.price, :precision => 2)}
 
