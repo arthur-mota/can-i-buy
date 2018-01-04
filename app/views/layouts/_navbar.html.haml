@@ -11,7 +11,7 @@
             #{@profile.profile_name}
         - else
           %button.btn.btn-outline-light{:type => "button", :data => {:toggle => "dropdown"}, "aria-haspopup" => "true", "aria-expanded" => "false"}
-            Select profile
+            Profile
         %button.btn.btn-outline-light.dropdown-toggle.dropdown-toggle-split{:type => "button", :data => {:toggle => "dropdown"}, "aria-haspopup" => "true", "aria-expanded" => "false"}
           %span.sr-only Toggle Dropdown
         .dropdown-menu
@@ -19,6 +19,11 @@
             %a.dropdown-item{:href => "#{profile_products_path(profile.id)}"}#{profile.profile_name}
           .dropdown-divider
           %a.dropdown-item{:href => '#', :data => {:toggle => "modal", :target => "#addProfileModal"}} Add Profile #{fa_icon "plus-circle"}
+
+      &nbsp;&nbsp;
+
       - if controller.controller_name == "products"
-        &nbsp;&nbsp;
         %button.btn.btn-outline-light.my-2.my-sm-0{:type => "button", :data => {:toggle => "modal", :target => "#addProductModal"}} Add Product
+      - elsif controller.controller_name == "profiles"
+        %button.btn.btn-outline-light{:type => "button", :data => {:toggle => "modal", :target => '#addProfileModal'}}
+          Add Profile

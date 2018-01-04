@@ -43,3 +43,19 @@ $slider-thumb-size: 22px;
   margin-top: 35px;
   text-align: right;
 }
+
+.valueButton{
+  margin: 1px auto 1px auto;
+}
+
+.optionsButton{
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+@media (min-width: 576px) {
+  .optionsButton{
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+}

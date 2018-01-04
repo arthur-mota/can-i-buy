@@ -9,6 +9,11 @@
         .modal-body
           = form.input :profile_name, required: true, label: "Profile name"
         .modal-footer
-          %button.btn.btn-outline-secondary{:type => "button", :data => {:dismiss => "modal"}} Close
-          = link_to 'Delete Profile', url_for(action: :destroy, controller: :profiles, id: @profile.id), method: :delete, data: {confirm: "Are you sure you want to delete \"#{@profile.profile_name}\" and all products inside it?"}, class: "btn btn-outline-danger"
-          = form.button :submit, "Update Profile", class: 'btn btn-outline-dark'
+          .container
+            .row
+              .col-12.col-sm-4
+                %button.btn.btn-outline-secondary.btn-block{:type => "button", :data => {:dismiss => "modal"}, :style => "margin-top: 2px; margin-bottom: 2px;"} Close
+              .col-12.col-sm-4
+                = link_to 'Delete', url_for(action: :destroy, controller: :profiles, id: @profile.id), method: :delete, data: {confirm: "Are you sure you want to delete \"#{@profile.profile_name}\" and all products inside it?"}, class: "btn btn-outline-danger btn-block", style: "margin-top: 2px; margin-bottom: 2px;"
+              .col-12.col-sm-4
+                = form.button :submit, "Update", class: 'btn btn-outline-dark btn-block', style: "margin-top: 2px; margin-bottom: 2px;"
