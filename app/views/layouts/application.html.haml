@@ -17,12 +17,13 @@
     = render "profiles/add_profile_modal"
 
     .container
-      - flash.each do |name, msg|
-        %br
-        %div{:class => "alert alert-#{name} alert-dismissable fade show", :role => "alert"}
-          = msg
-          %button.close{:type => "button", :data => {:dismiss => "alert"}, "aria-label" => "Close"}
-            %span{"aria-hidden" => "true"} &times;
+      - unless session[:product_id]
+        - flash.each do |name, msg|
+          %br
+          %div{:class => "alert alert-#{name} alert-dismissable fade show", :role => "alert"}
+            = msg
+            %button.close{:type => "button", :data => {:dismiss => "alert"}, "aria-label" => "Close"}
+              %span{"aria-hidden" => "true"} &times;
 
       = yield
 
@@ -36,3 +37,8 @@
             %a{:href => "https://github.com/hasken-14/can-i-buy", :target => :_blank}
               View on GitHub
               = fa_icon "github"
+
+-# Deletes the session variable :profile_id, if there is one
+-# See the products controller (products#update)
+- if session[:product_id]
+  - session.delete(:product_id)

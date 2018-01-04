@@ -31,12 +31,15 @@ class ProductsController < ApplicationController
       # return render plain: @product.inspect
       @product.save
       flash[:success] = "Product added successfully."
-      redirect_to profile_products_path(params[:profile_id])
+      set_product_id_session(@product.id)
     else
       # Couldn't save the product
       flash[:danger] = "Your input isn't valid. Try again."
-      redirect_to profile_products_path(params[:profile_id])
     end
+
+    # Redirects back
+    redirect_to profile_products_path(params[:profile_id])
+
   end
 
   def update
@@ -57,6 +60,7 @@ class ProductsController < ApplicationController
       if @product.update(product_params_update)
         # Success
         flash[:success] = "Product updated successfully."
+        set_product_id_session(@product.id)
       else
         # Couldn't update
         flash[:danger] = "There was an error while saving your update."
@@ -66,8 +70,6 @@ class ProductsController < ApplicationController
       flash[:danger] = "Your input isn't valid. Try again."
     end
 
-    # Set a session containing the updated product
-    session[:product_id] = @product.id
     # Redirects back
     return redirect_to profile_products_path(params[:profile_id])
   end
@@ -109,5 +111,13 @@ class ProductsController < ApplicationController
 
       # A test hasn't passed
       return false
+    end
+
+    def set_product_id_session(product_id)
+      # Sets a session variable containing the updated product id.
+      # This variable is gonna be used to show only the updated product's
+      # accordion after redirecting, and to manage flash messages according
+      # to that accordion.
+      session[:product_id] = product_id
     end
 end

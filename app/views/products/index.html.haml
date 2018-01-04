@@ -5,7 +5,6 @@
     Last updated product ID, used by JavaScript to show
     the right collapse element, if there is one
   %span#lastUpdatedElement{:style => "display: none"}= session[:product_id]
-  - session.delete(:product_id)
 
 - if @products.length == 0
   .row
@@ -31,6 +30,14 @@
 
         .collapse{:id => "collapse#{product.id}", :role => "tabpanel", "aria-labelledby" => "heading#{product.id}", :data => {:parent => "#accordion#{product.id}"}}
           .card-body
+
+            - if session[:product_id] and session[:product_id] == product.id
+              - flash.each do |name, msg|
+                %div{:class => "alert alert-#{name} alert-dismissable fade show", :role => "alert"}
+                  = msg
+                  %button.close{:type => "button", :data => {:dismiss => "alert"}, "aria-label" => "Close"}
+                    %span{"aria-hidden" => "true"} &times;
+
             .progress
               .progress-bar.bg-dark{:role => "progressbar", :style => "width: #{percentage.to_i}%;", "aria-valuenow" => "#{percentage.to_i}", "aria-valuemin" => "0", "aria-valuemax" => "100"}
             %br
