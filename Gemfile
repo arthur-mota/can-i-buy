@@ -75,3 +75,5 @@ gem 'simple_form'
 
 # Font Awesome for icons
 gem "font-awesome-rails"
+
+gem 'coveralls', require: false
