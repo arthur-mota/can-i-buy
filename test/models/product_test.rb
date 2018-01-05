@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class ProductTest < ActiveSupport::TestCase
+  # TODO add update, destroy tests for Product model
+  
   def setup
     @profile = profiles(:one)
     @product = products(:one)

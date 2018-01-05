@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class ProfilesControllerTest < ActionDispatch::IntegrationTest
+  # TODO add more tests for profiles controller
+  
   setup do
     @profile = profiles(:one)
   end

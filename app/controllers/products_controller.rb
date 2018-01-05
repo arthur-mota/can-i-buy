@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  # TODO comment the JavaScript for products controller (products.coffee)
+  # TODO comment the Stylesheets for products controller (products.scss)
 
   def index
     # Store all products into @products by created_at descending order

@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
+  # TODO add more tests for products controller
+  
   setup do
     @profile = profiles(:one)
     @product = products(:one)
@@ -43,6 +45,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update a product" do
     put profile_product_url(@profile, @product), params: { progress: 1000, profile_id: @profile.id }
+    assert_redirected_to profile_products_path(@profile)
     @product.reload
     assert_equal 1000.0, @product.progress
   end

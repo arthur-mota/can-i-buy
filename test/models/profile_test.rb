@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class ProfileTest < ActiveSupport::TestCase
+  # TODO add more tests for Profile model
+  
   def setup
     @profile = profiles(:one)
   end

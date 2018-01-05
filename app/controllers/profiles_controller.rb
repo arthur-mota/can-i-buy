@@ -1,4 +1,6 @@
 class ProfilesController < ApplicationController
+  # TODO comment this controller
+  
   def index
     @profiles = Profile.all
   end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # TODO remove unused resources routes
+  
   resources :profiles do
     resources :products
   end
