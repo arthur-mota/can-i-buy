@@ -23,7 +23,7 @@ gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 4.1.2'
+gem 'uglifier', '~> 4.1.3'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -76,4 +76,8 @@ gem 'simple_form'
 # Font Awesome for icons
 gem "font-awesome-rails"
 
-gem 'coveralls', require: false
+# Thor
+gem "thor", "~> 0.19.4"
+
+# Coveralls for tests coverage
+gem 'coveralls', '~> 0.8.21', require: false
