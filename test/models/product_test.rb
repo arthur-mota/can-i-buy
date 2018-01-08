@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ProductTest < ActiveSupport::TestCase
   # TODO add update, destroy tests for Product model
-  
+
   def setup
     @profile = profiles(:one)
     @product = products(:one)
@@ -51,8 +51,8 @@ class ProductTest < ActiveSupport::TestCase
     assert_not @product.save
   end
 
-  test "shouldn't create a new product with a name length less than 4" do
-    @product.name = "abc"
+  test "shouldn't create a new product with a name length less than 2" do
+    @product.name = "ab"
     refute @product.valid?, 'saved product with name.length < 4'
     assert_not @product.save
   end

@@ -3,6 +3,6 @@ class Product < ApplicationRecord
 
   validates :profile_id, presence: true
   validates :price, presence: true, numericality: { greater_than: 0 }
-  validates :name, presence: true, length: { in: 2..255 }
+  validates :name, presence: true, length: { in: 3..255 }
   validates :url, presence: false
 end
