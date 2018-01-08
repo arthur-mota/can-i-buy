@@ -16,15 +16,15 @@
       = render "profiles/edit_profile_modal"
     = render "profiles/add_profile_modal"
 
-    .container
-      - unless session[:product_id]
-        - flash.each do |name, msg|
-          %br
-          %div{:class => "alert alert-#{name} alert-dismissable fade show", :role => "alert"}
+    - unless session[:product_id]
+      - flash.each do |name, msg|
+        .container
+          %div{:class => "alert alert-#{name} alert-dismissable fade show", :role => "alert", :style => "margin-top: 30px"}
             = msg
             %button.close{:type => "button", :data => {:dismiss => "alert"}, "aria-label" => "Close"}
               %span{"aria-hidden" => "true"} &times;
 
+    .container
       = yield
 
     .container

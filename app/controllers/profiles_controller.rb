@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   # TODO comment this controller
-  
+
   def index
     @profiles = Profile.all
   end
@@ -11,6 +11,9 @@ class ProfilesController < ApplicationController
       @profile = Profile.new(profile_params)
       @profile.save
       redirect_to profile_products_path(@profile.id)
+    else
+      flash[:danger] = "Profile name is invalid, too big or is not unique."
+      return redirect_to root_path
     end
   end
 
@@ -18,10 +21,10 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
     if @profile.update(profile_params)
       flash[:success] = "Profile updated successfully."
-      return redirect_to profile_products_path(@profile)
+    else
+      flash[:danger] = "Profile name is invalid, too big or is not unique."
     end
-
-    flash[:danger] = "Profile name is invalid, too big or is not unique."
+    
     redirect_to profile_products_path(@profile)
   end
 
