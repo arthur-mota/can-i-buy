@@ -1,8 +1,6 @@
 require 'test_helper'
 
-class ProductsControllerTest < ActionDispatch::IntegrationTest
-  # TODO add more tests for products controller
-  
+class ProductsControllerTest < ActionDispatch::IntegrationTest  
   setup do
     @profile = profiles(:one)
     @product = products(:one)
