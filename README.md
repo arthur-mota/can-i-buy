@@ -1,20 +1,20 @@
-# Can I Buy? [![Build Status](https://travis-ci.org/hasken-14/can-i-buy.svg?branch=master)](https://travis-ci.org/hasken-14/can-i-buy) [![Dependency Status](https://beta.gemnasium.com/badges/github.com/hasken-14/can-i-buy.svg)](https://beta.gemnasium.com/projects/github.com/hasken-14/can-i-buy) [![Maintainability](https://api.codeclimate.com/v1/badges/14333236233f66a20c6e/maintainability)](https://codeclimate.com/github/hasken-14/can-i-buy/maintainability) [![Coverage Status](https://coveralls.io/repos/github/hasken-14/can-i-buy/badge.svg?branch=master)](https://coveralls.io/github/hasken-14/can-i-buy?branch=master)
+# Can I Buy? [![Build Status](https://travis-ci.org/hasken-14/can-i-buy.svg?branch=master)](https://travis-ci.org/hasken-14/can-i-buy) [![Maintainability](https://api.codeclimate.com/v1/badges/14333236233f66a20c6e/maintainability)](https://codeclimate.com/github/hasken-14/can-i-buy/maintainability) [![Coverage Status](https://coveralls.io/repos/github/hasken-14/can-i-buy/badge.svg?branch=master)](https://coveralls.io/github/hasken-14/can-i-buy?branch=master)
 
-A simple tool which allows you to map all your savings, through different and unlimited profiles. Open source and built with Ruby on Rails, it's easy to customize and implement new features as you'd like.
+A simple tool which allows you to map all your savings, through different and unlimited profiles. Open source and built in Ruby on Rails, it's easy to customize and implement new features as you want.
 
 ## Supported Ruby versions
 
-The app is currently working in Ruby __2.4.3__, __2.3.6__, __2.3.1__. You can see download and install instructions in the [official website](https://www.ruby-lang.org/en/).
+The app is currently working in Ruby __2.4.3__, __2.3.6__, __2.3.1__. You can download and see install instructions in the [official website](https://www.ruby-lang.org/en/).
 
 ## Trying before install
 
 You can try _can-i-buy_ at our [Heroku app](https://can-i-buy.herokuapp.com/). 
 
-Note about Heroku: as we use a free Heroku plan, if the monthly quota is exceeded, the app won't work until the month ends.
+Note about Heroku: as we use a free Heroku plan, if the month's quota is exceeded, the app won't work until the month ends.
 
 ## Installing
 
-First, you'll need git command line application. Download it [here](https://git-scm.com/downloads).
+At first, you'll need to install git command line application. Download it [here](https://git-scm.com/downloads).
 Now, clone the _can-i-buy_ repository by running `git clone https://github.com/hasken-14/can-i-buy.git`. A local copy of the code will be downloaded to your PC. Enter the folder _can-i-buy_ and run:
 
 * `bundle install` to install all the Ruby gems which are required by this project;
@@ -29,8 +29,8 @@ Now, access it by your local IP address and the port provided by Rails, e.g. 127
 
 ## Testing
 
-You can run the project tests simply by running `rake` at your terminal. You should do it before commiting any changes you make.
+You can run the project tests simply by running `rake` at your terminal. You should do it before committing any changes you make.
 
 ## Updating
 
-If a new version is released at this GitHub repository and you want to update your local files, just type `git pull`.
+If a new version had been released at this GitHub repository and you want to update your local files, just type `git pull`.
