@@ -81,3 +81,6 @@ gem "thor", "~> 0.19.4"
 
 # Coveralls for tests coverage
 gem 'coveralls', '~> 0.8.21', require: false
+
+# Chart JS
+gem 'chartjs-ror'
