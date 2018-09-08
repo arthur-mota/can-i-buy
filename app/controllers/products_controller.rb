@@ -33,18 +33,6 @@ class ProductsController < ApplicationController
 
     profile_valid?(params[:profile_id])
 
-    current_day_num = Time.now.strftime("%w")
-    weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    days_labels = [
-      "#{weekdays[current_day_num.to_i-6]}",
-      "#{weekdays[current_day_num.to_i-5]}",
-      "#{weekdays[current_day_num.to_i-4]}",
-      "#{weekdays[current_day_num.to_i-3]}",
-      "#{weekdays[current_day_num.to_i-2]}",
-      "#{weekdays[current_day_num.to_i-1]}",
-      "#{weekdays[current_day_num.to_i]}"
-    ]
-
     current_month_num = Time.now.strftime("%-m").to_i - 1
     months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     months_labels = [
@@ -57,14 +45,14 @@ class ProductsController < ApplicationController
       "#{months[current_month_num.to_i]}"
     ]
 
-    @data_by_days = {
-      labels: days_labels,
+    @data_real_time = {
+      labels: @product.last_progresses.keys.map {|key| key[5..15]},
       datasets: [
         {
-          label: "Progress by day",
+          label: "Real time progress ($)",
           backgroundColor: "transparent",
           borderColor: "rgba(52, 58, 64, 1)",
-          data: [162, 167, 171, 178, 189, 193, 200]
+          data: @product.last_progresses.values
         }
       ]
     }
