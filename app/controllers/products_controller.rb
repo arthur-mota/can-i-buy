@@ -31,6 +31,59 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     profile_valid?(params[:profile_id])
+
+    current_day_num = Time.now.strftime("%w")
+    weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    days_labels = [
+      "#{weekdays[current_day_num.to_i-6]}",
+      "#{weekdays[current_day_num.to_i-5]}",
+      "#{weekdays[current_day_num.to_i-4]}",
+      "#{weekdays[current_day_num.to_i-3]}",
+      "#{weekdays[current_day_num.to_i-2]}",
+      "#{weekdays[current_day_num.to_i-1]}",
+      "#{weekdays[current_day_num.to_i]}"
+    ]
+
+    current_month_num = Time.now.strftime("%-m").to_i - 1
+    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    months_labels = [
+      "#{months[current_month_num.to_i-6]}",
+      "#{months[current_month_num.to_i-5]}",
+      "#{months[current_month_num.to_i-4]}",
+      "#{months[current_month_num.to_i-3]}",
+      "#{months[current_month_num.to_i-2]}",
+      "#{months[current_month_num.to_i-1]}",
+      "#{months[current_month_num.to_i]}"
+    ]
+
+    @data_by_days = {
+      labels: days_labels,
+      datasets: [
+        {
+          label: "Progress by day",
+          backgroundColor: "transparent",
+          borderColor: "rgba(52, 58, 64, 1)",
+          data: [162, 167, 171, 178, 189, 193, 200]
+        }
+      ]
+    }
+
+    @data_by_months = {
+      labels: months_labels,
+      datasets: [
+        {
+          label: "Progress by month",
+          backgroundColor: "transparent",
+          borderColor: "rgba(52, 58, 64, 1)",
+          data: [0, 23, 50, 80, 120, 160, 200]
+        }
+      ]
+    }
+
+    @options = {
+      width: 100,
+      height: 100
+    }
   end
 
   def update

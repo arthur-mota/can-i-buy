@@ -84,6 +84,15 @@
                     = link_to "Add $1", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress + 1), method: :patch, class: "valueButton btn btn-dark btn-block", id: "addCustomValue#{@product.id}", "data-product-id": @product.id, "data-current-progress": @product.progress
 
   %hr
+  %br
+  .container
+    .row
+      .col-12.col-sm-12.col-md-6.col-lg-6
+        = line_chart @data_by_months, @options
+      .col-12.col-sm-12.col-md-6.col-lg-6
+        = line_chart @data_by_days, @options
+
+  %br
   .container.h-100
     .row.h-100.justify-content-center.align-items-center
       = link_to 'Reset progress', url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: 0), method: :patch, class: "btn btn-outline-secondary optionsButton", data: {confirm: "You're about to reset your progress in this product ($#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $0.00 (0%)). Are you sure?"}
