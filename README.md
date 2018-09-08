@@ -4,11 +4,11 @@ A simple tool which allows you to map all your savings, through different and un
 
 ## Supported Ruby versions
 
-The app is currently working in Ruby __2.4.3__, __2.3.6__, __2.3.1__. You can download and see install instructions in the [official website](https://www.ruby-lang.org/en/).
+The app is currently working with Ruby __2.4.3__, __2.3.6__, __2.3.1__. You can download and see install instructions in the [official website](https://www.ruby-lang.org/en/).
 
 ## Trying before install
 
-You can try _can-i-buy_ at our [Heroku app](https://can-i-buy.herokuapp.com/). 
+You can try _can-i-buy_ at our [Heroku app](https://can-i-buy.herokuapp.com/).
 
 Note about Heroku: as we use a free Heroku plan, if the month's quota is exceeded, the app won't work until the month ends.
 
