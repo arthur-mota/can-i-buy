@@ -5,4 +5,6 @@ class Product < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :name, presence: true, length: { in: 3..255 }
   validates :url, presence: false
+
+  serialize :last_progresses, Hash
 end

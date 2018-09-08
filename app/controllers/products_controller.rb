@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
       @product = Product.new(product_params_create)
       # Uncomment the next line to check the passed parameters
       # return render plain: @product.inspect
+      @product.last_progresses = {"#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}": "0.0"}
       @product.save
       flash[:success] = "Product added successfully."
       set_product_id_session(@product.id)
@@ -102,6 +103,13 @@ class ProductsController < ApplicationController
 
       # Try to update progress
       if @product.update(product_params_update)
+        if(@product.last_progresses.keys.last[0...10] == "#{Time.now.strftime('%Y-%m-%d')}")
+          @product.last_progresses[:"#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"] = params[:progress]
+          if(@product.last_progresses.length > 7)
+            @product.last_progresses.delete(@product.last_progresses.keys.first)
+          end
+          @product.save
+        end
         # Success
         flash[:success] = "Product updated successfully."
         set_product_id_session(@product.id)
