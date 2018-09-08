@@ -5,7 +5,8 @@
 
 .card-body
   %h3
-    Products/
+    = link_to "#{@profile.profile_name}", url_for(action: :index, controller: :products, profile_id: @profile.id), method: :get, style: "color: #212529;"
+    \/
     %span{:class => "badge badge-dark"} #{@product.name}
   %hr
   %br
