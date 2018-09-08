@@ -1,4 +1,4 @@
-# Can I Buy? [![Build Status](https://travis-ci.org/hasken-14/can-i-buy.svg?branch=master)](https://travis-ci.org/hasken-14/can-i-buy) [![Maintainability](https://api.codeclimate.com/v1/badges/14333236233f66a20c6e/maintainability)](https://codeclimate.com/github/hasken-14/can-i-buy/maintainability) [![Coverage Status](https://coveralls.io/repos/github/hasken-14/can-i-buy/badge.svg?branch=master)](https://coveralls.io/github/hasken-14/can-i-buy?branch=master)
+# Can I Buy? [![Build Status](https://travis-ci.com/hasken-14/can-i-buy.svg?token=dHqxCB8wzSA7nfMdNNda&branch=master)](https://travis-ci.com/hasken-14/can-i-buy) [![Maintainability](https://api.codeclimate.com/v1/badges/14333236233f66a20c6e/maintainability)](https://codeclimate.com/github/hasken-14/can-i-buy/maintainability) [![Coverage Status](https://coveralls.io/repos/github/hasken-14/can-i-buy/badge.svg?branch=master)](https://coveralls.io/github/hasken-14/can-i-buy?branch=master)
 
 A simple tool which allows you to map all your savings, through different and unlimited profiles. Open source and built in Ruby on Rails, it's easy to customize and implement new features as you want.
 
