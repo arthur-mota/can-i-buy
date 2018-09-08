@@ -92,7 +92,7 @@ class ProductsController < ApplicationController
 
       # Try to update progress
       if @product.update(product_params_update)
-        if(@product.last_progresses.keys.last[0...10] != "#{Time.now.strftime('%Y-%m-%d')}")
+        if(@product.last_progresses.keys.last.to_s[0...10] != "#{Time.now.strftime('%Y-%m-%d')}")
           # New day, add to last_progresses_day
           @product.last_progresses_day[:"#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"] = params[:progress]
           if(@product.last_progresses_day.length > 7)
