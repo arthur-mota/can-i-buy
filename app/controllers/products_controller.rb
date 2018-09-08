@@ -4,23 +4,7 @@ class ProductsController < ApplicationController
 
   def index
     # Store all products into @products by created_at descending order
-    @profiles = Profile.all
-    if Profile.exists?(params[:profile_id])
-      # If the profile present in the url exists, stores it into @profile variable
-      @profile = Profile.find(params[:profile_id])
-    else
-      # If the profile doesn't exist
-      if @profiles.empty?
-        # If there is no profile in the database, redirect to root_path with a flash message
-        flash[:warning] = "That profile doesn't exist. Think about creating a new one."
-        redirect_to root_path
-      else
-        # If there is at least one profile, stores the first
-        @profile = @profiles.first
-        flash[:warning] = "That profile doesn't exist. You were redirected to profile \"#{@profile.profile_name}\""
-        redirect_to profile_products_path(@profile)
-      end
-    end
+    profile_valid?(params[:profile_id])
     @products = Product.where(:profile_id => @profile.id).order(created_at: :desc)
   end
 
@@ -41,7 +25,12 @@ class ProductsController < ApplicationController
 
     # Redirects back
     redirect_to profile_products_path(params[:profile_id])
+  end
 
+  def show
+    @product = Product.find(params[:id])
+
+    profile_valid?(params[:profile_id])
   end
 
   def update
@@ -121,5 +110,25 @@ class ProductsController < ApplicationController
       # accordion after redirecting, and to manage flash messages according
       # to that accordion.
       session[:product_id] = product_id
+    end
+
+    def profile_valid?(profile_id)
+      @profiles = Profile.all
+      if Profile.exists?(profile_id)
+        # If the profile present in the url exists, stores it into @profile variable
+        @profile = Profile.find(profile_id)
+      else
+        # If the profile doesn't exist
+        if @profiles.empty?
+          # If there is no profile in the database, redirect to root_path with a flash message
+          flash[:warning] = "That profile doesn't exist. Think about creating a new one."
+          redirect_to root_path
+        else
+          # If there is at least one profile, stores the first
+          @profile = @profiles.first
+          flash[:warning] = "That profile doesn't exist. You were redirected to profile \"#{@profile.profile_name}\""
+          redirect_to profile_products_path(@profile)
+        end
+      end
     end
 end

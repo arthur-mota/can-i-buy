@@ -3,10 +3,12 @@
     .modal-content
       = simple_form_for @profile, defaults: { wrapper_html: { class: 'form-group' }, input_html: { class: 'form-control' }} do |form|
         .modal-header
-          %h5.modal-title#addProfileModalLabel Edit Profile
+          %h5.modal-title#addProfileModalLabel Edit&nbsp;
+          = link_to 'Profile', url_for(action: :index, controller: :products, profile_id: @profile.id), method: :get, style: "font-size: 1.25rem;"
           %button.close{:type => "button", :data => {:dismiss => "modal"}, "aria-label" => "Close"}
             %span{"aria-hidden" => "true"} &times;
         .modal-body
+
           = form.input :profile_name, required: true, label: "Profile name"
         .modal-footer
           .container
