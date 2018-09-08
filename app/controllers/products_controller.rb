@@ -62,7 +62,7 @@ class ProductsController < ApplicationController
     end
 
     # Redirects back
-    return redirect_to profile_products_path(params[:profile_id])
+    return redirect_to profile_product_path(params[:profile_id], @product.id)
   end
 
   def destroy

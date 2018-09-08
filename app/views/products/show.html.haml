@@ -1,1 +1,90 @@
-%p oi
+%br
+
+- if @product.profile_id == @profile.id
+  - percentage = (@product.progress * 100)/@product.price
+
+.card-body
+  %h3
+    Products/
+    %span{:class => "badge badge-dark"} #{@product.name}
+  %hr
+  %br
+  - if session[:product_id] and session[:product_id] == @product.id
+    - flash.each do |name, msg|
+      %div{:class => "alert alert-#{name} alert-dismissable fade show", :role => "alert"}
+        = msg
+        %button.close{:type => "button", :data => {:dismiss => "alert"}, "aria-label" => "Close"}
+          %span{"aria-hidden" => "true"} &times;
+  %br
+  .progress
+    .progress-bar.bg-dark{:role => "progressbar", :style => "width: #{percentage.to_i}%;", "aria-valuenow" => "#{percentage.to_i}", "aria-valuemin" => "0", "aria-valuemax" => "100"}
+  %br
+  .table-responsive-md
+    %table.table
+      %thead
+        %tr
+          %th{:scope => "col"}#
+          %th{:scope => "col"}Product
+          %th{:scope => "col"}URL
+          %th{:scope => "col"}Creation date
+          %th{:scope => "col"}Updated at
+          %th{:scope => "col"}Progress
+      %tbody
+        %tr
+          %th{:scope => "row"}#{@product.id}
+          %th #{@product.name}
+          %th
+            - if @product.url != ''
+              %a{:href => "#{@product.url}", :target => "blank"}#{@product.url}
+            - else
+              \-
+          %th #{@product.created_at}
+          %th #{@product.updated_at}
+          %th $#{number_with_precision(@product.progress, :precision => 2)} / $#{@product.price}
+  %br
+  .container-fluid
+    .row
+      .col-md-3.col-12.col-sm-6
+        = link_to "+ $1000.00", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress+1000), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-dark btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(@product.progress + 1000, :precision => 2)} (#{((@product.progress + 1000) * 100/@product.price).to_i}%)"
+        = link_to "+ $500.00", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress+500), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-dark btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(@product.progress + 500, :precision => 2)} (#{((@product.progress + 500) * 100/@product.price).to_i}%)"
+        = link_to "- $100.00", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress-100), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-secondary btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(@product.progress - 100, :precision => 2)} (#{((@product.progress - 100) * 100/@product.price).to_i}%)"
+
+
+      .col-md-3.col-12.col-sm-6
+        = link_to "+ $100.00", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress+100), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-dark btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(@product.progress + 100, :precision => 2)} (#{((@product.progress + 100) * 100/@product.price).to_i}%)"
+        = link_to "+ $50.00", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress+50), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-dark btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(@product.progress + 50, :precision => 2)} (#{((@product.progress + 50) * 100/@product.price).to_i}%)"
+        = link_to "- $10.00", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress-10), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-secondary btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(@product.progress - 10, :precision => 2)} (#{((@product.progress - 10) * 100/@product.price).to_i}%)"
+
+      .col-md-3.col-12.col-sm-6
+        = link_to "+ $10.00", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress+10), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-dark btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(@product.progress + 10, :precision => 2)} (#{((@product.progress + 10) * 100/@product.price).to_i}%)"
+        = link_to "+ $5.00", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress+5), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-dark btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(@product.progress + 5, :precision => 2)} (#{((@product.progress + 5) * 100/@product.price).to_i}%)"
+        = link_to "- $1.00", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress-1), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-secondary btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(@product.progress - 1, :precision => 2)} (#{((@product.progress - 1) * 100/@product.price).to_i}%)"
+
+      .col-md-3.col-12.col-sm-6
+        = link_to "+ $1.00", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress+1), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-dark btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(@product.progress + 1, :precision => 2)} (#{((@product.progress + 1) * 100/@product.price).to_i}%)"
+        = link_to "+ $0.10", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress+0.1), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-dark btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(@product.progress + 0.1, :precision => 2)} (#{((@product.progress + 0.1) * 100/@product.price).to_i}%)"
+        = link_to "- $0.10", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress-0.1), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-secondary btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(@product.progress - 0.1, :precision => 2)} (#{((@product.progress - 0.1) * 100/@product.price).to_i}%)"
+
+    .row{:style => "margin-top: 35px"}
+      .col-md-3.col-lg-3.col-sm-12.col-12
+        %button.btn.btn-outline-dark.valueButton{:type => "button", :data => {:toggle => "collapse", :target => "#addCustomValueCollapse#{@product.id}"}, "aria-expanded" => "false", "aria-controls" => "addCustomValueCollapse#{@product.id}", :style => "width: 100%;"} Custom Value
+
+      .col-12.col-sm-12.col-md-9.col-lg-9
+        .collapse.valueButton{:id => "addCustomValueCollapse#{@product.id}"}
+          .card.card-body
+            .slidecontainer
+              %input.customValueSlider{:type => "range", :min => "1", :max => "1000", :value => "1", :id => "customValueRange#{@product.id}", :oninput => "processCustomValue(#{@product.id});"}
+
+              .customValueButtons
+                .row
+                  .col-12.col-sm-6.col-md-6.col-lg-6
+                    = link_to "Remove $1", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress - 1), method: :patch, class: "btn btn-dark valueButton btn-block", id: "removeCustomValue#{@product.id}"
+                  .col-12.col-sm-6.col-md-6.col-lg-6
+                    = link_to "Add $1", url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: @product.progress + 1), method: :patch, class: "valueButton btn btn-dark btn-block", id: "addCustomValue#{@product.id}", "data-product-id": @product.id, "data-current-progress": @product.progress
+
+  %hr
+  .container.h-100
+    .row.h-100.justify-content-center.align-items-center
+      = link_to 'Reset progress', url_for(action: :update, profile_id: @profile.id, id: @product.id, progress: 0), method: :patch, class: "btn btn-outline-secondary optionsButton", data: {confirm: "You're about to reset your progress in this product ($#{number_with_precision(@product.progress, :precision => 2)} (#{percentage.to_i}%) -> $0.00 (0%)). Are you sure?"}
+      = link_to 'Delete Product', url_for(action: :destroy, id: @product.id), method: :delete, data: {confirm: "Are you sure you want to delete \"#{@product.name}\"?"}, class: "btn btn-outline-danger optionsButton"
+%br
