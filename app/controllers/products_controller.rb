@@ -213,7 +213,7 @@ class ProductsController < ApplicationController
         end
         return ('%.2f' % (sum/(values.length-1))).to_f
       else
-        return 0.0
+        return values[0].to_f
       end
     end
 
