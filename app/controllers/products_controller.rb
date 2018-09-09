@@ -138,6 +138,20 @@ class ProductsController < ApplicationController
     return redirect_to profile_product_path(params[:profile_id], @product.id)
   end
 
+  def update_info
+    @product = Product.find(params[:product][:product_id])
+    if(@product.update(product_params_update_info))
+      @product.name
+      @product.save
+
+      # Success
+      flash[:success] = "Product info updated successfully."
+      set_product_id_session(@product.id)
+    end
+
+    return redirect_to profile_product_path(params[:product][:profile_id], @product.id)
+  end
+
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
@@ -155,6 +169,11 @@ class ProductsController < ApplicationController
     def product_params_update
       params[:progress] = helper.number_with_precision(params[:progress], :precision => 2)
       params.permit(:progress)
+    end
+
+    def product_params_update_info
+      params[:price] = helper.number_with_precision(params[:product][:price], :precision => 2)
+      params.require(:product).permit(:name, :price, :url)
     end
 
     def helper

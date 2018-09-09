@@ -14,6 +14,8 @@
     - if controller.controller_name == "products"
       = render "products/add_product_modal"
       = render "profiles/edit_profile_modal"
+      - if params[:action] == "show"
+        = render "products/edit_product_modal"
     = render "profiles/add_profile_modal"
 
     - unless session[:product_id]

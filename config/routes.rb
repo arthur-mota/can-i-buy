@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   # TODO remove unused resources routes
-  
+
   resources :profiles do
-    resources :products
+    resources :products do
+      member do
+        patch :update_info
+        put :update_info
+      end
+    end
   end
 
   root :to => "profiles#index"
