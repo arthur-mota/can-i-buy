@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
       labels: @product.last_progresses.keys.map {|key| key[5..15]},
       datasets: [
         {
-          label: "Real time progress ($)",
+          label: "Real progress ($)",
           backgroundColor: "transparent",
           borderColor: "rgba(52, 58, 64, 1)",
           data: @product.last_progresses.values
@@ -67,7 +67,7 @@ class ProductsController < ApplicationController
       labels: @product.last_progresses_day.keys.map {|key| key[0..9]},
       datasets: [
         {
-          label: "Progress by day ($)",
+          label: "Real progress ($)",
           backgroundColor: "transparent",
           borderColor: "rgba(52, 58, 64, 1)",
           data: @product.last_progresses_day.values

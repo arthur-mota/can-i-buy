@@ -97,11 +97,9 @@
   .container
     .row
       .col-12.col-sm-12.col-md-6.col-lg-6
+        %h5.text-center Real time progress
+        %br
         = line_chart @data_real_time, @options
-      .col-12.col-sm-12.col-md-6.col-lg-6
-        = line_chart @data_by_days, @options
-    .row
-      .col-12.col-sm-12.col-md-6.col-lg-6
         %p.text-center
           Average:
           - if @average_real_time < 0
@@ -112,6 +110,9 @@
             %span.badge.badge-success +#{@average_real_time} $
           \/ update
       .col-12.col-sm-12.col-md-6.col-lg-6
+        %h5.text-center Progress per day
+        %br
+        = line_chart @data_by_days, @options
         %p.text-center
           Average:
           - if @average_by_day < 0
