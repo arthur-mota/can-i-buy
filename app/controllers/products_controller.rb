@@ -39,6 +39,7 @@ class ProductsController < ApplicationController
 
     average_data = create_average_data(@product.last_progresses.values, @average_real_time)
     average_color = @average_real_time > 0 ? "rgba(66, 244, 72, 1)" : "rgba(244, 65, 65, 1)"
+    average_color = @average_real_time == 0 ? "rgba(108, 117, 125, 1)" : average_color
 
     @data_real_time = {
       labels: @product.last_progresses.keys.map {|key| key[5..15]},
@@ -60,6 +61,7 @@ class ProductsController < ApplicationController
 
     average_data = create_average_data(@product.last_progresses_day.values, @average_by_day)
     average_color = @average_by_day > 0 ? "rgba(66, 244, 72, 1)" : "rgba(244, 65, 65, 1)"
+    average_color = @average_real_time == 0 ? "rgba(108, 117, 125, 1)" : average_color
 
     @data_by_days = {
       labels: @product.last_progresses_day.keys.map {|key| key[0..9]},
@@ -204,17 +206,21 @@ class ProductsController < ApplicationController
     end
 
     def average_growth(values)
-      sum = 0
-      for i in 1..(values.length-1)
-        sum += values[i].to_f - values[i-1].to_f
+      if(values.length > 1)
+        sum = 0
+        for i in 1..(values.length-1)
+          sum += values[i].to_f - values[i-1].to_f
+        end
+        return ('%.2f' % (sum/(values.length-1))).to_f
+      else
+        return 0.0
       end
-      return ('%.2f' % (sum/(values.length-1))).to_f
     end
 
     def create_average_data(original_data, average)
       average_data = [original_data.first.to_f]
       for i in 1..(original_data.length-1)
-        average_data << average_data.last+average
+        average_data << ('%.2f' % (average_data.last+average)).to_f
       end
 
       return average_data
