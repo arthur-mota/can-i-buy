@@ -91,7 +91,28 @@
         = line_chart @data_real_time, @options
       .col-12.col-sm-12.col-md-6.col-lg-6
         = line_chart @data_by_days, @options
-
+    .row
+      .col-12.col-sm-12.col-md-6.col-lg-6
+        %p.text-center
+          Average:
+          - if @average_real_time < 0
+            %span.badge.badge-danger #{@average_real_time} $
+          - elsif @average_real_time == 0
+            %span.badge.badge-secondary +#{@average_real_time} $
+          - else
+            %span.badge.badge-success +#{@average_real_time} $
+          \/ update
+      .col-12.col-sm-12.col-md-6.col-lg-6
+        %p.text-center
+          Average:
+          - if @average_by_day < 0
+            %span.badge.badge-danger #{@average_by_day} $
+          - elsif @average_by_day == 0
+            %span.badge.badge-secondary +#{@average_by_day} $
+          - else
+            %span.badge.badge-success +#{@average_by_day} $
+          \/ day
+  %br
   %br
   .container.h-100
     .row.h-100.justify-content-center.align-items-center

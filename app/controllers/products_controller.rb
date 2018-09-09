@@ -34,17 +34,11 @@ class ProductsController < ApplicationController
 
     profile_valid?(params[:profile_id])
 
-    current_month_num = Time.now.strftime("%-m").to_i - 1
-    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    months_labels = [
-      "#{months[current_month_num.to_i-6]}",
-      "#{months[current_month_num.to_i-5]}",
-      "#{months[current_month_num.to_i-4]}",
-      "#{months[current_month_num.to_i-3]}",
-      "#{months[current_month_num.to_i-2]}",
-      "#{months[current_month_num.to_i-1]}",
-      "#{months[current_month_num.to_i]}"
-    ]
+    @average_real_time = average_growth(@product.last_progresses.values)
+    @average_by_day = average_growth(@product.last_progresses_day.values)
+
+    average_data = create_average_data(@product.last_progresses.values, @average_real_time)
+    average_color = @average_real_time > 0 ? "rgba(66, 244, 72, 1)" : "rgba(244, 65, 65, 1)"
 
     @data_real_time = {
       labels: @product.last_progresses.keys.map {|key| key[5..15]},
@@ -54,9 +48,18 @@ class ProductsController < ApplicationController
           backgroundColor: "transparent",
           borderColor: "rgba(52, 58, 64, 1)",
           data: @product.last_progresses.values
+        },
+        {
+          label: "Average progress ($)",
+          backgroundColor: "transparent",
+          borderColor: average_color,
+          data: average_data
         }
       ]
     }
+
+    average_data = create_average_data(@product.last_progresses_day.values, @average_by_day)
+    average_color = @average_by_day > 0 ? "rgba(66, 244, 72, 1)" : "rgba(244, 65, 65, 1)"
 
     @data_by_days = {
       labels: @product.last_progresses_day.keys.map {|key| key[0..9]},
@@ -66,6 +69,12 @@ class ProductsController < ApplicationController
           backgroundColor: "transparent",
           borderColor: "rgba(52, 58, 64, 1)",
           data: @product.last_progresses_day.values
+        },
+        {
+          label: "Average progress ($)",
+          backgroundColor: "transparent",
+          borderColor: average_color,
+          data: average_data
         }
       ]
     }
@@ -74,6 +83,7 @@ class ProductsController < ApplicationController
       width: 100,
       height: 100
     }
+
   end
 
   def update
@@ -191,5 +201,22 @@ class ProductsController < ApplicationController
           redirect_to profile_products_path(@profile)
         end
       end
+    end
+
+    def average_growth(values)
+      sum = 0
+      for i in 1..(values.length-1)
+        sum += values[i].to_f - values[i-1].to_f
+      end
+      return ('%.2f' % (sum/(values.length-1))).to_f
+    end
+
+    def create_average_data(original_data, average)
+      average_data = [original_data.first.to_f]
+      for i in 1..(original_data.length-1)
+        average_data << average_data.last+average
+      end
+
+      return average_data
     end
 end
