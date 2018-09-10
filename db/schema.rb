@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180908185441) do
+ActiveRecord::Schema.define(version: 20180908195438) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20180908185441) do
     t.datetime "updated_at", null: false
     t.integer "profile_id"
     t.text "last_progresses", default: "---\n:2018-09-08 15:49:06 -0300: '0.0'\n"
+    t.text "last_progresses_day"
     t.index ["profile_id"], name: "index_products_on_profile_id"
   end
 

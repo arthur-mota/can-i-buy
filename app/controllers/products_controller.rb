@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
       # Uncomment the next line to check the passed parameters
       # return render plain: @product.inspect
       @product.last_progresses = {"#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}": "0.0"}
+      @product.last_progresses_day = {"#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}": "0.0"}
       @product.save
       flash[:success] = "Product added successfully."
       set_product_id_session(@product.id)
@@ -57,14 +58,14 @@ class ProductsController < ApplicationController
       ]
     }
 
-    @data_by_months = {
-      labels: months_labels,
+    @data_by_days = {
+      labels: @product.last_progresses_day.keys.map {|key| key[0..9]},
       datasets: [
         {
-          label: "Progress by month",
+          label: "Progress by day ($)",
           backgroundColor: "transparent",
           borderColor: "rgba(52, 58, 64, 1)",
-          data: [0, 23, 50, 80, 120, 160, 200]
+          data: @product.last_progresses_day.values
         }
       ]
     }
@@ -91,13 +92,24 @@ class ProductsController < ApplicationController
 
       # Try to update progress
       if @product.update(product_params_update)
-        if(@product.last_progresses.keys.last[0...10] == "#{Time.now.strftime('%Y-%m-%d')}")
-          @product.last_progresses[:"#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"] = params[:progress]
-          if(@product.last_progresses.length > 7)
-            @product.last_progresses.delete(@product.last_progresses.keys.first)
+        if(@product.last_progresses.keys.last[0...10] != "#{Time.now.strftime('%Y-%m-%d')}")
+          # New day, add to last_progresses_day
+          @product.last_progresses_day[:"#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"] = params[:progress]
+          if(@product.last_progresses_day.length > 7)
+            @product.last_progresses_day.delete(@product.last_progresses_day.keys.first)
           end
-          @product.save
         end
+        # Add the new progress to last_progresses
+        @product.last_progresses[:"#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"] = params[:progress]
+
+        # Replace the last_progresses_day from today
+        @product.last_progresses_day.delete(@product.last_progresses_day.keys.last)
+        @product.last_progresses_day[:"#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"] = params[:progress]
+        if(@product.last_progresses.length > 7)
+          @product.last_progresses.delete(@product.last_progresses.keys.first)
+        end
+        @product.save
+
         # Success
         flash[:success] = "Product updated successfully."
         set_product_id_session(@product.id)

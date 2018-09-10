@@ -7,4 +7,5 @@ class Product < ApplicationRecord
   validates :url, presence: false
 
   serialize :last_progresses, Hash
+  serialize :last_progresses_day, Hash
 end
