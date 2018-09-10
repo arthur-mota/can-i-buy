@@ -16,13 +16,13 @@ window.processCustomValue = (productId) ->
   customizeAddButton = (product, valueSlider) ->
     newProgress = setNewProgress('add')
     buttonAdd.innerHTML = 'Add $' + valueSlider
-    buttonAdd.href = 'products/' + product + '?progress=' + newProgress
+    buttonAdd.href = product + '?progress=' + newProgress
     return
 
   customizeRemoveButton = (product, valueSlider) ->
     newProgress = setNewProgress('remove')
     buttonRemove.innerHTML = 'Remove $' + valueSlider
-    buttonRemove.href = 'products/' + product + '?progress=' + newProgress
+    buttonRemove.href = product + '?progress=' + newProgress
     return
 
   setNewProgress = (operation) ->

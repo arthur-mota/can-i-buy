@@ -96,29 +96,13 @@
                   = link_to "+ $0.10", url_for(action: :update, profile_id: @profile.id, id: product.id, progress: product.progress+0.1), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-dark btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(product.progress + 0.1, :precision => 2)} (#{((product.progress + 0.1) * 100/product.price).to_i}%)"
                   = link_to "- $0.10", url_for(action: :update, profile_id: @profile.id, id: product.id, progress: product.progress-0.1), style: "margin: 2px auto 2px auto", method: :patch, class: "btn btn-secondary btn-block", "data-toggle": "tooltip", "data-placement": "top", title: "$#{number_with_precision(product.progress, :precision => 2)} (#{percentage.to_i}%) -> $#{number_with_precision(product.progress - 0.1, :precision => 2)} (#{((product.progress - 0.1) * 100/product.price).to_i}%)"
 
-              .row{:style => "margin-top: 35px"}
-                .col-md-3.col-lg-3.col-sm-12.col-12
-                  %button.btn.btn-outline-dark.valueButton{:type => "button", :data => {:toggle => "collapse", :target => "#addCustomValueCollapse#{product.id}"}, "aria-expanded" => "false", "aria-controls" => "addCustomValueCollapse#{product.id}", :style => "width: 100%;"} Custom Value
-
-                .col-12.col-sm-12.col-md-9.col-lg-9
-                  .collapse.valueButton{:id => "addCustomValueCollapse#{product.id}"}
-                    .card.card-body
-                      .slidecontainer
-                        %input.customValueSlider{:type => "range", :min => "1", :max => "1000", :value => "1", :id => "customValueRange#{product.id}", :oninput => "processCustomValue(#{product.id});"}
-
-                        .customValueButtons
-                          .row
-                            .col-12.col-sm-6.col-md-6.col-lg-6
-                              = link_to "Remove $1", url_for(action: :update, profile_id: @profile.id, id: product.id, progress: product.progress - 1), method: :patch, class: "btn btn-dark valueButton btn-block", id: "removeCustomValue#{product.id}"
-                            .col-12.col-sm-6.col-md-6.col-lg-6
-                              = link_to "Add $1", url_for(action: :update, profile_id: @profile.id, id: product.id, progress: product.progress + 1), method: :patch, class: "valueButton btn btn-dark btn-block", id: "addCustomValue#{product.id}", "data-product-id": product.id, "data-current-progress": product.progress
 
             %hr
             .container.h-100
               .row.h-100.justify-content-center.align-items-center
-                = link_to 'Show details', url_for(action: :show, profile_id: @profile.id, id: product.id), class: "btn btn-outline-dark optionsButton"
+                = link_to 'View more options', url_for(action: :show, profile_id: @profile.id, id: product.id), class: "btn btn-outline-dark optionsButton"
                 = link_to 'Reset progress', url_for(action: :update, profile_id: @profile.id, id: product.id, progress: 0), method: :patch, class: "btn btn-outline-secondary optionsButton", data: {confirm: "You're about to reset your progress in this product ($#{number_with_precision(product.progress, :precision => 2)} (#{percentage.to_i}%) -> $0.00 (0%)). Are you sure?"}
-                = link_to 'Delete Product', url_for(action: :destroy, id: product.id), method: :delete, data: {confirm: "Are you sure you want to delete \"#{product.name}\"?"}, class: "btn btn-outline-danger optionsButton"
+                = link_to 'Delete product', url_for(action: :destroy, id: product.id), method: :delete, data: {confirm: "Are you sure you want to delete \"#{product.name}\"?"}, class: "btn btn-outline-danger optionsButton"
     %br
 
 :javascript
